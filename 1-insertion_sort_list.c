@@ -63,10 +63,11 @@ void swap_node(listint_t **current, listint_t **previous)
  */
 int size_list(listint_t *list)
 {
-	int size = 0;
+	int size;
 
 	if (list == NULL)
-		return (size);
+		return (0);
+	size = 0;
 	while (list)
 	{
 		size++;
