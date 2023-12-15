@@ -26,5 +26,5 @@ void print_list(const listint_t *list);
 void insertion_sort_list(listint_t **list);
 int size_list(listint_t *list);
 void swap_node(listint_t **current, listint_t **previous);
-void change_position(listint_t **cur_n, listint_t **prev_n, listint_t **lst);
+void change_pos(listint_t **curr, listint_t **prev);
 #endif
