@@ -9,32 +9,14 @@
  */
 void change_pos(listint_t **curr, listint_t **prev)
 {
-	if ((*prev)->prev == NULL && (*curr)->next != NULL)
-	{
-		(*curr)->prev = NULL;
-		(*curr)->next->prev = *prev;
-		(*prev)->next = (*curr)->next;
-	}
-	else if ((*curr)->next == NULL && (*prev)->prev != NULL)
-	{
-		(*prev)->next = NULL;
+	if ((*prev)->prev != NULL)
 		(*prev)->prev->next = *curr;
-		(*curr)->prev = (*prev)->prev;
-	}
-	else if ((*curr)->next != NULL && (*prev)->prev != NULL)
-	{
+	if ((*curr)->next != NULL)
 		(*curr)->next->prev = *prev;
-		(*prev)->prev->next = *curr;
-		(*prev)->next = (*curr)->next;
-		(*curr)->prev = (*prev)->prev;
-	}
-	else
-	{
-		(*curr)->prev = NULL;
-		(*prev)->next = NULL;
-	}
-	(*curr)->next = *prev;
+	(*prev)->next = (*curr)->next;
+	(*curr)->prev = (*prev)->prev;
 	(*prev)->prev = *curr;
+	(*curr)->next = *prev;
 }
 
 /**
