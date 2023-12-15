@@ -9,6 +9,8 @@
  */
 void change_pos(listint_t **curr, listint_t **prev)
 {
+	if (*prev == NULL || *curr == NULL || *prev == *curr)
+		return;
 	if ((*prev)->prev != NULL)
 		(*prev)->prev->next = *curr;
 	if ((*curr)->next != NULL)
@@ -68,7 +70,7 @@ void insertion_sort_list(listint_t **list)
 {
 	listint_t *previous = NULL, *current = NULL, *pointer = NULL;
 
-	if (size_list(*list) < 2 || *list == NULL)
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 	pointer = *list;
 	while (pointer != NULL)
