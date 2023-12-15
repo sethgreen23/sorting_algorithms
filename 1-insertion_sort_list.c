@@ -7,16 +7,34 @@
  *
  * Return: nothing
  */
-void change_pos(listint_t **curr, listint_t **prev)
+void change_position(listint_t **cur_n, listint_t **prev_n, listint_t **lst)
 {
-	if ((*prev)->prev != NULL)
-		(*prev)->prev->next = *curr;
-	if ((*curr)->next != NULL)
-		(*curr)->next->prev = *prev;
-	(*curr)->prev = (*prev)->prev;
-	(*prev)->prev = *curr;
-	(*prev)->next = (*curr)->next;
-	(*curr)->next = *prev;
+	if (size_list(*lst) == 2)
+	{
+		(*prev_n)->next = NULL;
+		(*cur_n)->prev = NULL;
+	}
+	else if ((*prev_n)->prev == NULL)
+	{
+		(*cur_n)->prev = NULL;
+		(*prev_n)->next = (*cur_n)->next;
+		(*cur_n)->next->prev = *prev_n;
+	}
+	else if ((*cur_n)->next == NULL)
+	{
+		(*prev_n)->next = NULL;
+		(*prev_n)->prev->next = *cur_n;
+		(*cur_n)->prev = (*prev_n)->prev;
+	}
+	else
+	{
+		(*prev_n)->prev->next = *cur_n;
+		(*prev_n)->next = (*cur_n)->next;
+		(*cur_n)->prev = (*prev_n)->prev;
+		(*cur_n)->next->prev = *prev_n;
+	}
+	(*cur_n)->next = *prev_n;
+	(*prev_n)->prev = *cur_n;
 }
 
 /**
@@ -68,7 +86,7 @@ void insertion_sort_list(listint_t **list)
 {
 	listint_t *previous = NULL, *current = NULL, *pointer = NULL;
 
-	if (*list == NULL || (*list)->next == NULL)
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 	pointer = *list;
 	while (pointer != NULL)
