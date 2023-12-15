@@ -9,8 +9,6 @@
  */
 void change_pos(listint_t **curr, listint_t **prev)
 {
-	if (*prev == NULL || *curr == NULL || *prev == *curr)
-		return;
 	if ((*prev)->prev != NULL)
 		(*prev)->prev->next = *curr;
 	if ((*curr)->next != NULL)
