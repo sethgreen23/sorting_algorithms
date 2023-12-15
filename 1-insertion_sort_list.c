@@ -103,8 +103,6 @@ void insertion_sort_list(listint_t **list)
 					*list = previous;
 				print_list(*list);
 			}
-			else
-				break;
 			current = previous;
 			previous = previous->prev;
 		}
