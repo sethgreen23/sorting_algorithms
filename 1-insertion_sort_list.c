@@ -85,7 +85,7 @@ void insertion_sort_list(listint_t **list)
 {
 	listint_t *previous = NULL, *current = NULL, *pointer = NULL;
 
-	if (size_list(*list) < 2 || list == NULL)
+	if (size_list(*list) < 2 || *list == NULL)
 		return;
 	pointer = *list;
 	while (pointer != NULL)
