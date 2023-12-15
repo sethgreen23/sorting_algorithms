@@ -66,7 +66,7 @@ void insertion_sort_list(listint_t **list)
 
 	if (size_list(*list) < 2 || list == NULL)
 		return;
-	pointer = (*list)->next;
+	pointer = *list;
 	while (pointer != NULL)
 	{
 		current = pointer;
