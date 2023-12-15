@@ -36,6 +36,7 @@ void change_pos(listint_t **curr, listint_t **prev)
 	(*curr)->next = *prev;
 	(*prev)->prev = *curr;
 }
+
 /**
  * swap_node - Swap the nodes
  *
@@ -51,6 +52,27 @@ void swap_node(listint_t **current, listint_t **previous)
 	temp = *current;
 	*current = *previous;
 	*previous = temp;
+}
+
+/**
+ * size_list - count the size of a list
+ *
+ * @list: list to count the length
+ *
+ * Return: 0 or length of the list
+ */
+int size_list(listint_t *list)
+{
+	int size = 0;
+
+	if (list == NULL)
+		return (size);
+	while (list)
+	{
+		size++;
+		list = list->next;
+	}
+	return (size);
 }
 
 /**
