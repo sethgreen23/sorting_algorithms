@@ -13,9 +13,9 @@ void change_pos(listint_t **curr, listint_t **prev)
 		(*prev)->prev->next = *curr;
 	if ((*curr)->next != NULL)
 		(*curr)->next->prev = *prev;
-	(*prev)->next = (*curr)->next;
 	(*curr)->prev = (*prev)->prev;
 	(*prev)->prev = *curr;
+	(*prev)->next = (*curr)->next;
 	(*curr)->next = *prev;
 }
 
