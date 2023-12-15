@@ -7,34 +7,34 @@
  *
  * Return: nothing
  */
-void change_position(listint_t **cur_n, listint_t **prev_n, listint_t **lst)
+void change_pos(listint_t **curr, listint_t **prev)
 {
-	if (size_list(*lst) == 2)
+	if ((*prev)->prev == NULL && (*curr)->next != NULL)
 	{
-		(*prev_n)->next = NULL;
-		(*cur_n)->prev = NULL;
+		(*curr)->prev = NULL;
+		(*curr)->next->prev = *prev;
+		(*prev)->next = (*curr)->next;
 	}
-	else if ((*prev_n)->prev == NULL)
+	else if ((*curr)->next == NULL && (*prev)->prev != NULL)
 	{
-		(*cur_n)->prev = NULL;
-		(*prev_n)->next = (*cur_n)->next;
-		(*cur_n)->next->prev = *prev_n;
+		(*prev)->next = NULL;
+		(*prev)->prev->next = *curr;
+		(*curr)->prev = (*prev)->prev;
 	}
-	else if ((*cur_n)->next == NULL)
+	else if ((*curr)->next != NULL && (*prev)->prev != NULL)
 	{
-		(*prev_n)->next = NULL;
-		(*prev_n)->prev->next = *cur_n;
-		(*cur_n)->prev = (*prev_n)->prev;
+		(*curr)->next->prev = *prev;
+		(*prev)->prev->next = *curr;
+		(*prev)->next = (*curr)->next;
+		(*curr)->prev = (*prev)->prev;
 	}
 	else
 	{
-		(*prev_n)->prev->next = *cur_n;
-		(*prev_n)->next = (*cur_n)->next;
-		(*cur_n)->prev = (*prev_n)->prev;
-		(*cur_n)->next->prev = *prev_n;
+		(*curr)->prev = NULL;
+		(*prev)->next = NULL;
 	}
-	(*cur_n)->next = *prev_n;
-	(*prev_n)->prev = *cur_n;
+	(*curr)->next = *prev;
+	(*prev)->prev = *curr;
 }
 
 /**
