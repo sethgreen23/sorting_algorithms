@@ -27,4 +27,5 @@ void insertion_sort_list(listint_t **list);
 int size_list(listint_t *list);
 void swap_node(listint_t **current, listint_t **previous);
 void change_pos(listint_t **curr, listint_t **prev);
+void selection_sort(int *array, size_t size);
 #endif
