@@ -64,5 +64,7 @@ void quick_sort_algo(int *array, int low, int high, int size)
  */
 void quick_sort(int *array, size_t size)
 {
+	if (array == NULL || size == 0)
+		return;
 	quick_sort_algo(array, 0, size - 1, size);
 }
