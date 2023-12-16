@@ -28,4 +28,7 @@ int size_list(listint_t *list);
 void swap_node(listint_t **current, listint_t **previous);
 void change_pos(listint_t **curr, listint_t **prev);
 void selection_sort(int *array, size_t size);
+void quick_sort(int *array, size_t size);
+void quick_sort_algo(int *array, int low, int high, int size);
+int partition(int *array, int low, int high, int size);
 #endif
