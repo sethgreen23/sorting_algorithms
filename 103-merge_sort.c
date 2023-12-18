@@ -21,9 +21,9 @@ void merge(int *array, int lb, int mid, int ub, size_t size)
 	if (sorted == NULL)
 		return;
 	printf("Merging...\n");
-	print_sub(array, lb, mid, "Left");
-	print_sub(array, mid + 1, ub, "Right");
-	while (i <= mid - 1 && j <= ub)
+	print_sub(array, lb, mid - 1, "Left");
+	print_sub(array, mid, ub, "Right");
+	while (i < mid && j <= ub)
 	{
 		if (array[i] <= array[j])
 		{
@@ -42,7 +42,7 @@ void merge(int *array, int lb, int mid, int ub, size_t size)
 		sorted[k] = array[j];
 		j++, k++;
 	}
-	while (i <= mid - 1)
+	while (i < mid)
 	{
 		sorted[k] = array[i];
 		i++, k++;
@@ -92,9 +92,9 @@ void merge_srt(int *array, int lb, int ub, size_t size)
 
 	if (lb >= ub)
 		return;
-	mid = (ub + lb) / 2;
-	merge_srt(array, lb, mid, size);
-	merge_srt(array, mid + 1, ub, size);
+	mid = (ub + lb + 1) / 2;
+	merge_srt(array, lb, mid - 1, size);
+	merge_srt(array, mid, ub, size);
 	merge(array, lb, mid, ub, size);
 }
 /**
