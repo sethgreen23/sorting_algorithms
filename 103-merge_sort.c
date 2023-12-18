@@ -21,8 +21,8 @@ void merge(int *array, int lb, int mid, int ub, size_t size)
 	if (sorted == NULL)
 		return;
 	printf("Merging...\n");
-	print_sub(array, lb, mid - 1, "Left");
-	print_sub(array, mid, ub, "Right");
+	print_sub(array, lb, mid - 1, "left");
+	print_sub(array, mid, ub, "right");
 	while (i < mid && j <= ub)
 	{
 		if (array[i] <= array[j])
