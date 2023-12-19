@@ -53,6 +53,7 @@ void bitonic_srt(int *array, int lb, int mid, size_t size, int direction)
 void merge_bitonic(int *array, int lb, int mid, size_t size, int direction)
 {
 	int k, i;
+
 	if (mid > 1)
 	{
 		k = mid / 2;
