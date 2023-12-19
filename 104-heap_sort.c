@@ -9,10 +9,19 @@
  */
 void heap_sort(int *array, size_t size)
 {
+	int startIndex, i, n;
+
 	if (array == NULL || size <= 1)
 		return;
-	build_heap(array, size);
-	sort_heap(array, size);
+	startIndex = ((int)size / 2) - 1;
+	for (i = startIndex; i >= 0; i--)
+		heapify(array, (int)size, i, size);
+	for (n = (int)size - 1; n >= 0; n--)
+	{
+		swap_heap(&array[n], &array[0]);
+		print_array(array, size);
+		heapify(array, n, 0, size);
+	}
 }
 /**
  * swap_heap - swap two integers
@@ -31,79 +40,29 @@ void swap_heap(int *a, int *b)
 }
 
 /**
- * build_heap - build the heap
- * @array: The array to change it to a heap
- * @size: The size of the array
- *
- * Return: nothing
- */
-void build_heap(int *array, size_t size)
-{
-	int i, parent, j;
-
-	for (i = 0; i < (int)size; i++)
-	{
-		j = i;
-		while (j > 0)
-		{
-			parent = (j - 1) / 2;
-			if (array[parent] < array[j] && parent >= 0)
-			{
-				swap_heap(&array[parent], &array[j]);
-				print_array(array, size);
-				j = parent;
-			}
-			else
-				break;
-		}
-	}
-}
-
-/**
- * sort_heap - deleting the elements to sort the array
+ * heapyfiy - deleting the elements to sort the array
  * @array: The array to sort
+ * @n: size of the current array
+ * @i: the index we want to heapify from
  * @size: The size of the array
  *
  * Return: nothing
  */
-void sort_heap(int *array, size_t size)
+void heapify(int *array, int n, int i, size_t size)
 {
-	int size_srt = (int)size, idx_left, idx_right, left, right, j = 0;
+	int l, r, largest;
 
-	for (size_srt = size_srt - 1; size_srt >= 0;)
+	l = (2 * i) + 1;
+	r = (2 * i) + 2;
+	largest = i;
+	if (l < n && array[l] > array[largest])
+		largest = l;
+	if (r < n && array[r] > array[largest])
+		largest = r;
+	if (i != largest)
 	{
-		swap_heap(&array[size_srt], &array[0]);
+		swap_heap(&array[i], &array[largest]);
 		print_array(array, size);
-		--size_srt;
-		j = 0;
-		while (j <= size_srt)
-		{
-			idx_left = (2 * j) + 1;
-			idx_right = (2 * j) + 2;
-			left = (idx_left <= size_srt) ? array[idx_left] : 0;
-			right = (idx_right <= size_srt) ? array[idx_right] : 0;
-			if (left >= right)
-			{
-				if (left > array[j])
-				{
-					swap_heap(&array[idx_left], &array[j]);
-					print_array(array, size);
-					j = idx_left;
-				}
-				else
-					break;
-			}
-			else
-			{
-				if (right > array[j])
-				{
-					swap_heap(&array[idx_right], &array[j]);
-					print_array(array, size);
-					j = idx_right;
-				}
-				else
-					break;
-			}
-		}
+		heapify(array, n, largest, size);
 	}
 }

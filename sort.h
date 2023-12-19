@@ -41,7 +41,6 @@ void merge(int *array, int lb, int mid, int ub, size_t size);
 void print_sub(int *array, int lb, int ub, char *message);
 void heap_sort(int *array, size_t size);
 void swap_heap(int *a, int *b);
-void build_heap(int *array, size_t size);
-void sort_heap(int *array, size_t size);
+void heapify(int *array, int n, int i, size_t size);
 void radix_sort(int *array, size_t size);
 #endif
