@@ -43,7 +43,7 @@ void swap_heap(int *a, int *b)
 }
 
 /**
- * heapyfiy - deleting the elements to sort the array
+ * heapyfy - deleting the elements to sort the array
  * @array: The array to sort
  * @n: size of the current array
  * @i: the index we want to heapify from
