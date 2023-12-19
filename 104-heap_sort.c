@@ -44,7 +44,7 @@ void build_heap(int *array, size_t size)
 	for (i = 0; i < (int)size; i++)
 	{
 		j = i;
-		while (j >= 0)
+		while (j > 0)
 		{
 			parent = (j - 1) / 2;
 			if (array[parent] < array[j] && parent >= 0)
