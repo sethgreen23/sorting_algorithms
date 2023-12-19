@@ -63,7 +63,7 @@ void merge_bitonic(int *array, int lb, int mid, size_t size, int direction)
 			{
 				swap_bitonic(&array[i], &array[i + k]);
 				merge_bitonic(array, lb, k, size, direction);
-				merge_bitonic(array, lb, k, size, direction);
+				merge_bitonic(array, lb + k, k, size, direction);
 			}
 		}
 	}
