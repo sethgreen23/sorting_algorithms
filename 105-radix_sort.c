@@ -18,7 +18,7 @@ int get_max(int *array, size_t size)
 		if (array[i] > m)
 			m = array[i];
 	}
-	return m;
+	return (m);
 }
 
 /**
