@@ -47,7 +47,7 @@ void build_heap(int *array, size_t size)
 		while (j >= 0)
 		{
 			parent = (j - 1) / 2;
-			if (array[parent] < array[j])
+			if (array[parent] < array[j] && parent >= 0)
 			{
 				swap_heap(&array[parent], &array[j]);
 				print_array(array, size);
