@@ -1,85 +1,81 @@
 #include "sort.h"
 
 /**
- * bitonic_sort - Bitonic Sorted algorithm
- * @array: The array to sort
- * @size: The array size
- *
- * Return: nothing
+ * bitonic_sort - sorts an array of integers in ascending order using
+ * Bitonic sort algorithm
+ * @array: array to be sorted
+ * @size: size of the array
  */
 void bitonic_sort(int *array, size_t size)
 {
+	int mid, direction = 1;
+
 	if (array == NULL || size <= 1)
 		return;
-	bitonic_srt(array, 0, (int)size, size, 1);
+
+	mid = size;
+
+	bitonicSort(array, 0, mid, direction, size);
 }
 /**
- * bitonic_srt - bitonic sorting recursive function
- * @array: the array to sort
- * @lb: lower bound
- * @mid: mid value
- * @size: size of the big array
- * @direction: the direction of the sorting
+ * bitonicSort - runs biotonic sort algorithm recursively
+ * @array: array to be sorted
+ * @lb: lower bound of the array sub array
+ * @mid: mid point of the sub array
+ * @direction: specifies if the array is to be sorted in ascending or
+ * descending order
+ * @size: size of the entire array
  */
-void bitonic_srt(int *array, int lb, int mid, size_t size, int direction)
+void bitonicSort(int *array, int lb, int mid, int direction, size_t size)
 {
 	int k;
-	char *d;
+	char *dxn;
 
 	if (mid > 1)
 	{
-		d = (direction == 1) ? "UP" : "DOWN";
 		k = mid / 2;
-		printf("Merging [%d/%lu] (%s):\n", mid, size, d);
-		print_array(array + lb, mid);
-		bitonic_srt(array, lb, k, size, 1);
-		bitonic_srt(array, lb + k, k, size, 0);
-		merge_bitonic(array, lb, mid, size, direction);
-		printf("Result [%d/%lu] (%s):\n", mid, size, d);
+
+		if (direction)
+			dxn = "UP";
+		else
+			dxn = "DOWN";
+		printf("Merging [%d/%ld] (%s):\n", mid, size, dxn);
 		print_array(array + lb, mid);
 
+		bitonicSort(array, lb, k, 1, size);
+		bitonicSort(array, (lb + k), k, 0, size);
+		bitonicMerge(array, lb, mid, direction);
+		printf("Result [%d/%ld] (%s):\n", mid, size, dxn);
+		print_array(array + lb, mid);
 	}
 }
-/**
- * merge_bitonic - merge the left and right subarrays
- * @array: The array to sort
- * @lb: lower bound
- * @mid: mid position
- * @size: size of the big array
- * @direction: direction of the sorting
- *
- * Return: nothing
- */
-void merge_bitonic(int *array, int lb, int mid, size_t size, int direction)
-{
-	int k, i;
 
-	if (mid > 1)
+/**
+ * bitonicMerge - merges the sub arrays based on the sorting
+ * direction
+ * @array: array to be sorted
+ * @lb: lower bound of the array
+ * @count: highest index of the sub array
+ * @direction: direction
+ */
+void bitonicMerge(int *array, int lb, int count, int direction)
+{
+	int k, i, tmp;
+
+	if (count > 1)
 	{
-		k = mid / 2;
+		k = count / 2;
+
 		for (i = lb; i < (lb + k); i++)
 		{
 			if (direction == (array[i] > array[i + k]))
 			{
-				swap_bitonic(&array[i], &array[i + k]);
+				tmp = array[i];
+				array[i] = array[i + k];
+				array[i + k] = tmp;
 			}
-			merge_bitonic(array, lb, k, size, direction);
-			merge_bitonic(array, lb + k, k, size, direction);
 		}
+		bitonicMerge(array, lb, k, direction);
+		bitonicMerge(array, (lb + k), k, direction);
 	}
-}
-/**
- * swap_bitonic - swap values
- * @a: a
- * @b: b
- *
- * Return: nothing
- */
-void swap_bitonic(int *a, int *b)
-{
-	int tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
 }
