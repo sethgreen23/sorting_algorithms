@@ -57,7 +57,7 @@ void merge_bitonic(int *array, int lb, int mid, size_t size, int direction)
 	if (mid > 1)
 	{
 		k = mid / 2;
-		for (i = lb; i < lb + k; i++)
+		for (i = lb; i < (lb + k); i++)
 		{
 			if (direction == (array[i] > array[i + k]))
 			{
